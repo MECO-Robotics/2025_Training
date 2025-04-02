@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.DriveConstants;
+import frc.robot.util.mechanical_advantage.LoggedTunableNumber;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.LinkedList;
@@ -25,21 +27,21 @@ import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 public class DriveCommands {
-  private static final double DEADBAND = 0.1;
-  private static final double ANGLE_KP = 5.0;
-  private static final double ANGLE_KD = 0.4;
-  private static final double ANGLE_MAX_VELOCITY = 8.0;
-  private static final double ANGLE_MAX_ACCELERATION = 20.0;
-  private static final double FF_START_DELAY = 2.0; // Secs
-  private static final double FF_RAMP_RATE = 0.1; // Volts/Sec
-  private static final double WHEEL_RADIUS_MAX_VELOCITY = 0.25; // Rad/Sec
-  private static final double WHEEL_RADIUS_RAMP_RATE = 0.05; // Rad/Sec^2
+  private static final LoggedTunableNumber DEADBAND = new LoggedTunableNumber("DriveCommands/Deadband", 0.1);
+  private static final LoggedTunableNumber ANGLE_KP = new LoggedTunableNumber("DriveCommands/Angle_KP", 5.0);
+  private static final LoggedTunableNumber ANGLE_KD = new LoggedTunableNumber("DriveCommands/Angle_KD", 0.4);
+  private static final LoggedTunableNumber ANGLE_MAX_VELOCITY = new LoggedTunableNumber("DriveCommands/Angle_Max_Velocity", 8.0);
+  private static final LoggedTunableNumber ANGLE_MAX_ACCELERATION = new LoggedTunableNumber("DriveCommands/Angle_Max_Acceleration", 20.0);
+  private static final LoggedTunableNumber FF_START_DELAY = new LoggedTunableNumber("DriveCommands/FF_Start_Delay", 2.0); // Secs
+  private static final LoggedTunableNumber FF_RAMP_RATE = new LoggedTunableNumber("DriveCommands/FF_Ramp_Rate", 0.1); // Volts/Sec
+  private static final LoggedTunableNumber WHEEL_RADIUS_MAX_VELOCITY = new LoggedTunableNumber("DriveCommands/Wheel_Radius_Max_Velocity", 0.25); // Rad/Sec
+  private static final LoggedTunableNumber WHEEL_RADIUS_RAMP_RATE = new LoggedTunableNumber("DriveCommands/Wheel_Radius_Ramp_Rate", 0.05); // Rad/Sec^2
 
   private DriveCommands() {}
 
   private static Translation2d getLinearVelocityFromJoysticks(double x, double y) {
     // Apply deadband
-    double linearMagnitude = MathUtil.applyDeadband(Math.hypot(x, y), DEADBAND);
+    double linearMagnitude = MathUtil.applyDeadband(Math.hypot(x, y), DEADBAND.get());
     Rotation2d linearDirection = new Rotation2d(Math.atan2(y, x));
 
     // Square magnitude for more precise control
@@ -66,7 +68,7 @@ public class DriveCommands {
               getLinearVelocityFromJoysticks(xSupplier.getAsDouble(), ySupplier.getAsDouble());
 
           // Apply rotation deadband
-          double omega = MathUtil.applyDeadband(omegaSupplier.getAsDouble(), DEADBAND);
+          double omega = MathUtil.applyDeadband(omegaSupplier.getAsDouble(), DEADBAND.get());
 
           // Square rotation value for more precise control
           omega = Math.copySign(omega * omega, omega);
@@ -105,10 +107,10 @@ public class DriveCommands {
     // Create PID controller
     ProfiledPIDController angleController =
         new ProfiledPIDController(
-            ANGLE_KP,
+            ANGLE_KP.get(),
             0.0,
-            ANGLE_KD,
-            new TrapezoidProfile.Constraints(ANGLE_MAX_VELOCITY, ANGLE_MAX_ACCELERATION));
+            ANGLE_KD.get(),
+            new TrapezoidProfile.Constraints(ANGLE_MAX_VELOCITY.get(), ANGLE_MAX_ACCELERATION.get()));
     angleController.enableContinuousInput(-Math.PI, Math.PI);
 
     // Construct command
@@ -170,7 +172,7 @@ public class DriveCommands {
                   drive.runCharacterization(0.0);
                 },
                 drive)
-            .withTimeout(FF_START_DELAY),
+            .withTimeout(FF_START_DELAY.get()),
 
         // Start timer
         Commands.runOnce(timer::restart),
@@ -178,7 +180,7 @@ public class DriveCommands {
         // Accelerate and gather data
         Commands.run(
                 () -> {
-                  double voltage = timer.get() * FF_RAMP_RATE;
+                  double voltage = timer.get() * FF_RAMP_RATE.get();
                   drive.runCharacterization(voltage);
                   velocitySamples.add(drive.getFFCharacterizationVelocity());
                   voltageSamples.add(voltage);
@@ -211,7 +213,7 @@ public class DriveCommands {
 
   /** Measures the robot's wheel radius by spinning in a circle. */
   public static Command wheelRadiusCharacterization(Drive drive) {
-    SlewRateLimiter limiter = new SlewRateLimiter(WHEEL_RADIUS_RAMP_RATE);
+    SlewRateLimiter limiter = new SlewRateLimiter(WHEEL_RADIUS_RAMP_RATE.get());
     WheelRadiusCharacterizationState state = new WheelRadiusCharacterizationState();
 
     return Commands.parallel(
@@ -226,7 +228,7 @@ public class DriveCommands {
             // Turn in place, accelerating up to full speed
             Commands.run(
                 () -> {
-                  double speed = limiter.calculate(WHEEL_RADIUS_MAX_VELOCITY);
+                  double speed = limiter.calculate(WHEEL_RADIUS_MAX_VELOCITY.get());
                   drive.runVelocity(new ChassisSpeeds(0.0, 0.0, speed));
                 },
                 drive)),

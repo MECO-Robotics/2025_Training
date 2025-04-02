@@ -3,9 +3,14 @@ package frc.robot.subsystems.position_joint;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.commands.position_joint.PositionJointPositionCommand;
 import frc.robot.subsystems.position_joint.PositionJointConstants.PositionJointGains;
 import frc.robot.util.mechanical_advantage.LoggedTunableNumber;
+
+import java.util.function.DoubleSupplier;
+
 import org.littletonrobotics.junction.Logger;
 
 public class PositionJoint extends SubsystemBase {
@@ -154,5 +159,13 @@ public class PositionJoint extends SubsystemBase {
   public void resetPosition() {
     positionJoint.resetPosition();
     goal.position = 0;
+  }
+
+  public static Command setPosition(PositionJoint positionJoint, DoubleSupplier positionSupplier) {
+    return new PositionJointPositionCommand(positionJoint, positionSupplier);
+  }
+
+  public static Command setVelocity(PositionJoint positionJoint, DoubleSupplier velocitySupplier) {
+    return new PositionJointPositionCommand(positionJoint, velocitySupplier);
   }
 }
