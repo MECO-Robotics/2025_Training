@@ -8,9 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.position_joint.PositionJointPositionCommand;
 import frc.robot.subsystems.position_joint.PositionJointConstants.PositionJointGains;
 import frc.robot.util.mechanical_advantage.LoggedTunableNumber;
-
 import java.util.function.DoubleSupplier;
-
 import org.littletonrobotics.junction.Logger;
 
 public class PositionJoint extends SubsystemBase {
@@ -51,23 +49,26 @@ public class PositionJoint extends SubsystemBase {
     positionJoint = io;
     name = positionJoint.getName();
 
-    kP = new LoggedTunableNumber(name + "/Gains/kP", gains.kP());
-    kI = new LoggedTunableNumber(name + "/Gains/kI", gains.kI());
-    kD = new LoggedTunableNumber(name + "/Gains/kD", gains.kD());
-    kS = new LoggedTunableNumber(name + "/Gains/kS", gains.kS());
-    kG = new LoggedTunableNumber(name + "/Gains/kG", gains.kG());
-    kV = new LoggedTunableNumber(name + "/Gains/kV", gains.kV());
-    kA = new LoggedTunableNumber(name + "/Gains/kA", gains.kA());
+    kP = new LoggedTunableNumber(name + "/Gains/Feedback/kP", gains.kP());
+    kI = new LoggedTunableNumber(name + "/Gains/Feedback/kI", gains.kI());
+    kD = new LoggedTunableNumber(name + "/Gains/Feedback/kD", gains.kD());
+    kS = new LoggedTunableNumber(name + "/Gains/Feedforward/kS", gains.kS());
+    kG = new LoggedTunableNumber(name + "/Gains/Feedforward/kG", gains.kG());
+    kV = new LoggedTunableNumber(name + "/Gains/Feedforward/kV", gains.kV());
+    kA = new LoggedTunableNumber(name + "/Gains/Feedforward/kA", gains.kA());
 
-    kMaxVelo = new LoggedTunableNumber(name + "/Gains/kMaxVelo", gains.kMaxVelo());
-    kMaxAccel = new LoggedTunableNumber(name + "/Gains/kMaxAccel", gains.kMaxAccel());
+    kMaxVelo = new LoggedTunableNumber(name + "/Gains/Constraints/kMaxVelo", gains.kMaxVelo());
+    kMaxAccel = new LoggedTunableNumber(name + "/Gains/Constraints/kMaxAccel", gains.kMaxAccel());
 
-    kMinPosition = new LoggedTunableNumber(name + "/Gains/kMinPosition", gains.kMinPosition());
-    kMaxPosition = new LoggedTunableNumber(name + "/Gains/kMaxPosition", gains.kMaxPosition());
+    kMinPosition =
+        new LoggedTunableNumber(name + "/Gains/Constraints/kMinPosition", gains.kMinPosition());
+    kMaxPosition =
+        new LoggedTunableNumber(name + "/Gains/Constraints/kMaxPosition", gains.kMaxPosition());
 
-    kTolerance = new LoggedTunableNumber(name + "/Gains/kTolerance", gains.kTolerance());
+    kTolerance = new LoggedTunableNumber(name + "/Gains/Tolerance/kTolerance", gains.kTolerance());
 
-    kSetpoint = new LoggedTunableNumber(name + "/Gains/kSetpoint", gains.kDefaultSetpoint());
+    kSetpoint =
+        new LoggedTunableNumber(name + "/Gains/Setpoint/kSetpoint", gains.kDefaultSetpoint());
 
     constraints = new TrapezoidProfile.Constraints(gains.kMaxVelo(), gains.kMaxAccel());
     profile = new TrapezoidProfile(constraints);

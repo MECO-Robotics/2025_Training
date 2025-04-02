@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
+import frc.robot.subsystems.components.Components;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.Module;
 import frc.robot.subsystems.drive.azimuth_motor.AzimuthMotorConstants;
@@ -24,11 +25,11 @@ import frc.robot.subsystems.drive.drive_motor.DriveMotorIOTalonFX;
 import frc.robot.subsystems.drive.gyro.GyroIO;
 import frc.robot.subsystems.drive.gyro.GyroIOPigeon2;
 import frc.robot.subsystems.drive.odometry_threads.PhoenixOdometryThread;
-import frc.robot.subsystems.vision.Vision;
-import frc.robot.subsystems.vision.VisionConstants;
-import frc.robot.subsystems.vision.VisionIO;
-import frc.robot.subsystems.vision.VisionIOPhotonVision;
-import frc.robot.subsystems.vision.VisionIOPhotonVisionSim;
+import frc.robot.subsystems.position_joint.PositionJoint;
+import frc.robot.subsystems.position_joint.PositionJointConstants;
+import frc.robot.subsystems.position_joint.PositionJointIOReplay;
+import frc.robot.subsystems.position_joint.PositionJointIOSim;
+import frc.robot.subsystems.position_joint.PositionJointIOTalonFX;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -40,10 +41,11 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
+  private final PositionJoint elevator;
+  private final PositionJoint pivot;
 
   @SuppressWarnings("unused")
-  private final Vision vision;
-
+  private final Components components;
   // Controller
   private final CommandXboxController driverController = new CommandXboxController(0);
 
@@ -89,11 +91,16 @@ public class RobotContainer {
                     AzimuthMotorConstants.BACK_RIGHT_GAINS),
                 PhoenixOdometryThread.getInstance(),
                 null);
-        vision =
-            new Vision(
-                drive::addVisionMeasurement,
-                new VisionIOPhotonVision(
-                    VisionConstants.camera0Name, VisionConstants.robotToCamera0));
+
+        elevator =
+            new PositionJoint(
+                new PositionJointIOTalonFX("Elevator", PositionJointConstants.ELEVATOR_CONFIG),
+                PositionJointConstants.ELEVATOR_GAINS);
+        pivot =
+            new PositionJoint(
+                new PositionJointIOTalonFX("Pivot", PositionJointConstants.PIVOT_CONFIG),
+                PositionJointConstants.PIVOT_GAINS);
+
         break;
 
       case SIM:
@@ -123,13 +130,14 @@ public class RobotContainer {
                 null,
                 null);
 
-        vision =
-            new Vision(
-                drive::addVisionMeasurement,
-                new VisionIOPhotonVisionSim(
-                    VisionConstants.camera0Name, VisionConstants.robotToCamera0, drive::getPose),
-                new VisionIOPhotonVisionSim(
-                    VisionConstants.camera1Name, VisionConstants.robotToCamera1, drive::getPose));
+        elevator =
+            new PositionJoint(
+                new PositionJointIOSim("Elevator", PositionJointConstants.ELEVATOR_CONFIG),
+                PositionJointConstants.ELEVATOR_GAINS_SIM);
+        pivot =
+            new PositionJoint(
+                new PositionJointIOSim("Pivot", PositionJointConstants.PIVOT_CONFIG),
+                PositionJointConstants.PIVOT_GAINS_SIM);
         break;
 
       default:
@@ -159,9 +167,13 @@ public class RobotContainer {
                     AzimuthMotorConstants.BACK_RIGHT_GAINS),
                 null,
                 null);
-        vision = new Vision(drive::addVisionMeasurement, new VisionIO() {}, new VisionIO() {});
+
+        elevator = new PositionJoint(new PositionJointIOReplay("Elevator"), null);
+        pivot = new PositionJoint(new PositionJointIOReplay("Pivot"), null);
         break;
     }
+
+    components = new Components(elevator, pivot);
 
     // Set up auto routines
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());

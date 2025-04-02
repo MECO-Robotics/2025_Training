@@ -46,18 +46,39 @@ public class PositionJointConstants {
       Rotation2d encoderOffset,
       String canBus) {}
 
-  public static final PositionJointGains EXAMPLE_GAINS =
-      new PositionJointGains(1.5, 0.0, 0.0, 0.5, 1.0, 2.0, 0.0, 10.0, 20.0, 0.0, Math.PI, 0.2, 0.0);
+  public static final PositionJointGains ELEVATOR_GAINS =
+      new PositionJointGains(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-  public static final PositionJointHardwareConfig EXAMPLE_CONFIG =
+  public static final PositionJointGains ELEVATOR_GAINS_SIM =
+      new PositionJointGains(10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.0, 0, 0);
+
+  public static final PositionJointHardwareConfig ELEVATOR_CONFIG =
       new PositionJointHardwareConfig(
-          new int[] {10},
-          new boolean[] {true},
-          85.33333 * 2 * Math.PI,
+          new int[] {10, 11},
+          new boolean[] {false},
+          8,
+          40,
+          GravityType.CONSTANT,
+          EncoderType.EXTERNAL_CANCODER,
+          11,
+          Rotation2d.fromRotations(0.0),
+          "");
+
+  public static final PositionJointGains PIVOT_GAINS =
+      new PositionJointGains(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+  public static final PositionJointGains PIVOT_GAINS_SIM =
+      new PositionJointGains(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+  public static final PositionJointHardwareConfig PIVOT_CONFIG =
+      new PositionJointHardwareConfig(
+          new int[] {12},
+          new boolean[] {false},
+          4,
           40,
           GravityType.COSINE,
           EncoderType.EXTERNAL_CANCODER,
           11,
-          Rotation2d.fromRotations(0.5),
+          Rotation2d.fromRotations(0.0),
           "");
 }

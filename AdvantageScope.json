@@ -1,0 +1,227 @@
+{
+  "hubs": [
+    {
+      "x": 0,
+      "y": 0,
+      "width": 854,
+      "height": 1019,
+      "state": {
+        "sidebar": {
+          "width": 223,
+          "expanded": [
+            "/RealOutputs/Drive/DriveAlongTrajectory",
+            "/Drive/Module0",
+            "/Drive/Module1",
+            "/Drive/Module2",
+            "/Drive/Module3",
+            "/RealOutputs/SwerveStates/Measured/1",
+            "/RealOutputs/SwerveStates/Measured/1/angle",
+            "/RealOutputs/SwerveStates/Measured/0",
+            "/RealOutputs/SwerveStates/Measured/0/angle",
+            "/RealOutputs/SwerveStates/Setpoints",
+            "/RealOutputs/SwerveStates/Setpoints/0",
+            "/RealOutputs/SwerveStates/Setpoints/0/angle",
+            "/Drive/Az/FrontLeftAz",
+            "/RealOutputs/Drive/Az",
+            "/RealOutputs/Drive/Az/FrontLeftAz",
+            "/QuestNav/absolute/PoseObservations/0/pose",
+            "/QuestNav/absolute/PoseObservations/0/pose/rotation",
+            "/QuestNav/absolute/PoseObservations/0/pose/translation",
+            "/RealOutputs/DriveAlongTrajectory/Trajectory",
+            "/FrontRightAz/MotorsConnected",
+            "/FrontRightAz/MotorPositions",
+            "/Vision/Camera0/PoseObservations/0/pose/translation",
+            "/Climber/MotorVoltages",
+            "/FunnelPivot/MotorVoltages",
+            "/Climber/MotorCurrents",
+            "/Climber/MotorPositions",
+            "/Climber/MotorVelocities",
+            "/Climber/MotorsConnected",
+            "/Outtake_Top_Sensor",
+            "/Outtake/MotorVoltages",
+            "/Outtake/MotorCurrents",
+            "/SystemStats/6vRail",
+            "/SystemStats/5vRail",
+            "/SystemStats/3v3Rail",
+            "/RealOutputs/QuestNav/RawToField/rotation",
+            "/RealOutputs/QuestNav/RawToField/rotation/q",
+            "/RealOutputs/QuestNav/RawToField/translation",
+            "/RealOutputs/Odometry/Robot/rotation",
+            "/RealOutputs/DriveToPose/Goal",
+            "/RealOutputs/Alerts/errors",
+            "/RealOutputs/Alerts/warnings",
+            "/DriverStation/Joystick0",
+            "/ElevatorMotor/MotorCurrents",
+            "/RealOutputs/Drive/SwerveChassisSpeeds",
+            "/RealOutputs/Vision/Camera0/RobotPoses",
+            "/RealOutputs/Vision/infos",
+            "/RealOutputs/Vision/Summary",
+            "/RealOutputs/Vision/Summary/RobotPoses",
+            "/RealOutputs/Vision/Summary/RobotPosesAccepted",
+            "/RealOutputs/Vision/Summary/RobotPosesRejected",
+            "/RealOutputs/Vision/Camera0/RobotPosesRejected/0",
+            "/RealOutputs/Vision/Camera0/RobotPosesRejected/0/rotation",
+            "/RealOutputs/Vision/Camera0/RobotPosesRejected/0/translation",
+            "/RealOutputs/Vision/Camera0/RobotPosesAccepted/0",
+            "/RealOutputs/Vision/Camera0/RobotPosesAccepted/0/rotation",
+            "/RealOutputs/Vision/Camera0/RobotPosesAccepted/0/translation",
+            "/RealOutputs/Vision/Camera0/RobotPosesAccepted",
+            "/RealOutputs/QuestNav/offset/translation",
+            "/RealOutputs/QuestNav/offset/rotation",
+            "/Vision/Camera0/LatestTargetObservation",
+            "/RealOutputs/QuestNav/offset/rotation/q",
+            "/RealOutputs/QuestNav/offset",
+            "/Vision/Camera0/RobotToTagTransform",
+            "/Phoenix6",
+            "/Phoenix6/TalonFX-33",
+            "/Phoenix6/TalonFX-8",
+            "/RealOutputs/QuestNav",
+            "/QuestNav/absolute",
+            "/QuestNav/absolute/PoseObservations",
+            "/QuestNav/absolute/PoseObservations/0",
+            "/PowerDistribution/ChannelCurrent",
+            "/Drive/BackLeftAz/MotorCurrents",
+            "/Drive/BackLeftDrive/MotorCurrents",
+            "/Vision/Camera1",
+            "/Vision/Camera1/LatestTargetObservation",
+            "/Vision/Camera1/LatestTargetObservation/tx",
+            "/Vision/Camera1/PoseObservations",
+            "/Drive/BackLeftAz/MotorVoltages",
+            "/RealOutputs/Servo/SelectedTargetData/tx",
+            "/RealOutputs/Vision/Camera0",
+            "/Vision/Camera0/PoseObservations",
+            "/Vision/Camera1/LatestTargetObservation/ty",
+            "/Vision/Camera1/PoseObservations/0",
+            "/Vision/Camera0",
+            "/Vision/Camera0/LatestTargetObservation/ty",
+            "/RealOutputs/Drive/SwerveChassisSpeeds/Measured",
+            "/RealOutputs/Drive/SwerveChassisSpeeds/Setpoints",
+            "/RealOutputs/LeftPieceDetection",
+            "/RealOutputs/RightPieceDetection",
+            "/LeftPieceDetection/RobotToPieceTransform",
+            "/LeftPieceDetection/RobotToPieceTransform/translation",
+            "/LeftPieceDetection/RobotToPieceTransform/rotation",
+            "/LeftPieceDetection/RobotToPieceTransform/rotation/q",
+            "/RightCoralRollerMotor/MotorVoltages",
+            "/LeftCoralRollerMotor/MotorVoltages",
+            "/LeftCoralRollerMotor/MotorCurrents",
+            "/EndEffectorMotor/MotorVoltages",
+            "/ElbowMotor/MotorVoltages",
+            "/Drive/BackLeftDrive/MotorAccelerations",
+            "/Drive/BackLeftDrive/MotorPositions",
+            "/Drive/BackLeftAz",
+            "/RealOutputs/Servo/SelectedTargetData",
+            "/RealOutputs/Servo/SelectedTargetData/ty",
+            "/RealOutputs/Drive/Odometry",
+            "/RealOutputs/Servo",
+            "/RightCoralRollerMotor",
+            "/RightCoralRollerMotor/MotorsConnected",
+            "/RightCoralRollerMotor/MotorCurrents",
+            "/RightCoralRollerMotor/MotorVelocities",
+            "/RealOutputs/Components",
+            "/Elevator",
+            "/Pivot",
+            "/Pivot/MotorVoltages"
+          ]
+        },
+        "tabs": {
+          "selected": 2,
+          "tabs": [
+            {
+              "type": 0,
+              "title": "",
+              "controller": null,
+              "controllerUUID": "elad6ewni8xicih4c7fmym1pkv1xu43s",
+              "renderer": "#/",
+              "controlsHeight": 0
+            },
+            {
+              "type": 10,
+              "title": "Mechanism",
+              "controller": [
+                {
+                  "type": "mechanism",
+                  "logKey": "/RealOutputs/Components/Elevator",
+                  "logType": "Mechanism2d",
+                  "visible": true,
+                  "options": {}
+                }
+              ],
+              "controllerUUID": "ycp0b5tcp8z3ezfu0ivji1ml3z3wis29",
+              "renderer": null,
+              "controlsHeight": 213
+            },
+            {
+              "type": 1,
+              "title": "Elevator Graphs",
+              "controller": {
+                "leftSources": [
+                  {
+                    "type": "stepped",
+                    "logKey": "/Elevator/DesiredPosition",
+                    "logType": "Number",
+                    "visible": true,
+                    "options": {
+                      "color": "#2b66a2",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "/Elevator/OutputPosition",
+                    "logType": "Number",
+                    "visible": true,
+                    "options": {
+                      "color": "#af2437",
+                      "size": "normal"
+                    }
+                  }
+                ],
+                "rightSources": [
+                  {
+                    "type": "stepped",
+                    "logKey": "/Elevator/DesiredVelocity",
+                    "logType": "Number",
+                    "visible": false,
+                    "options": {
+                      "color": "#2b66a2",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "/Elevator/Velocity",
+                    "logType": "Number",
+                    "visible": false,
+                    "options": {
+                      "color": "#af2437",
+                      "size": "normal"
+                    }
+                  }
+                ],
+                "discreteSources": [],
+                "leftLockedRange": null,
+                "rightLockedRange": null,
+                "leftUnitConversion": {
+                  "type": null,
+                  "factor": 1
+                },
+                "rightUnitConversion": {
+                  "type": null,
+                  "factor": 1
+                },
+                "leftFilter": 0,
+                "rightFilter": 0
+              },
+              "controllerUUID": "4tpzmn8ts3mdptszym5sjhrvm888k16u",
+              "renderer": null,
+              "controlsHeight": 200
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "satellites": [],
+  "version": "4.1.0"
+}
